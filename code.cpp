@@ -4,9 +4,9 @@
 using namespace std;
 
 char menu();
-void train_list();
-void booking();
-void train_content();
+// void train_list();
+// void booking();
+// void train_content();
 
 char menu()
 {
@@ -24,12 +24,12 @@ int main()
   ch = menu();
   switch (ch)
   {
-    case '1':train_list();
-             break;
-    case '2':booking();
-             break;
-    case '3':train_content();
-             break;
+    // case '1':train_list();
+             // break;
+    // case '2':booking();
+    //          break;
+    // case '3':train_content();
+    //          break;
     case '4':exit(0);
              break;
     default : cout<<"\n\n\t!!...INVALID INPUT...!!";
