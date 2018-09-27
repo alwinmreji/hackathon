@@ -1,1 +1,2 @@
-A Freight Train Management System
+#Freight Train Management System
+Freight train or goods train is a group of freight cars hauled by one or more locomotive on a railway, transporting cargo all or some of the way between the shipper and the intended destination as part of the logistics chain. Trains may haul bulk materials, intermodal containers, general freight or specialized freight in purpose designed cars. In this type of trains' basic operation like loading, unloading, transferred, etc.is difficult, expensive and time consuming if not done properly. This program is designed to perform the common operations (like loading, unloading... etc. ) in most efficient manner on freight cars.    
