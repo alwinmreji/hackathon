@@ -8,6 +8,11 @@ char menu();
 // void booking();
 // void train_content();
 
+/* void train_list()
+{
+
+}*/
+
 char menu()
 {
   char a;
