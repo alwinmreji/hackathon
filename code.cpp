@@ -4,7 +4,7 @@
 using namespace std;
 
 char menu();
-void train_list();
+// void train_list();
 // void booking();
 // void train_content();
 
