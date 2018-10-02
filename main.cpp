@@ -8,10 +8,32 @@ char menu();
 // void booking();
 // void train_content();
 
-/* void train_list()
+ void train_list()
 {
+{
+	int choice;
+	printf("\n1.UBL-GLB \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
+	printf("enter the choice");
+	scanf_s("%d",&choice);
 
-}*/
+	switch(choice)
+	{
+	case 1:printf("U have selected hubbali to gulbarga\n");
+           break;
+	case 2:printf("U have selected hubbali to bijapur\n");
+		   break;
+    case 3:printf("U have selected hubbali to bangalore\n");
+		   break;
+	case 4:printf("U have selected hubbali to goa\n");
+		   break;
+	case 5:printf("U have selected hubbali to hydrabad\n");
+		   break;
+   default:printf(" please enter the correct choice\n");
+	}
+}
+
+
+}
 
 char menu()
 {
