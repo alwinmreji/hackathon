@@ -11,22 +11,21 @@ char menu();
  void train_list()
 {
 {
-	int choice;
-	printf("\n1.UBL-GLB \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
-	printf("enter the choice");
-	scanf_s("%d",&choice);
-
+	char choice;
+	printf("\n\t\tList Of Trains \n1.UBL-GLB \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
+	printf("\nEnter Your choice:\t");
+	scanf("%d",&choice);
 	switch(choice)
 	{
-	case 1:printf("U have selected hubbali to gulbarga\n");
+	case '1':printf("U have selected hubbali to gulbarga\n");
            break;
-	case 2:printf("U have selected hubbali to bijapur\n");
+	case '2':printf("U have selected hubbali to bijapur\n");
 		   break;
-    case 3:printf("U have selected hubbali to bangalore\n");
+    case '3':printf("U have selected hubbali to bangalore\n");
 		   break;
-	case 4:printf("U have selected hubbali to goa\n");
+	case '4':printf("U have selected hubbali to goa\n");
 		   break;
-	case 5:printf("U have selected hubbali to hydrabad\n");
+	case '5':printf("U have selected hubbali to hydrabad\n");
 		   break;
    default:printf(" please enter the correct choice\n");
 	}
@@ -51,8 +50,8 @@ int main()
   ch = menu();
   switch (ch)
   {
-    // case '1':train_list();
-             // break;
+    case '1':train_list();
+             break;
     // case '2':booking();
     //          break;
     // case '3':train_content();
