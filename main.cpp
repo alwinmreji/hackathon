@@ -33,25 +33,42 @@ void booking()
  void train_list()
 {
 	char choice;
-  char ubl_glb[9][4]={{{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}};
+  char ubl_glb[9][4]={{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}};
+  char ubl_bjpr[7][5]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+  char ubl_bgk[5]4[]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"}};
+  char ubl_goa[6][4]={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"VSG"}};
+  char ubl_hyb[9][5]={{"UBL"},{"GDG"},{"BDM"},{"BGK"},{"BJPR"},{"GLB"},{"YG"},{"VKB"},{"HYB"}};
 	printf("\n\t\tList Of Trains \n1.UBL-YPR \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
 	printf("\nEnter Your choice:\t");
 	scanf(" %c",&choice);
 	switch(choice)
 	{
-	case '1':for(int i=0; i<5; i++)
+	case '1':for(int i=0; i<9; i++)
            {
                cout<<ubl_glb[i]<<'\n';
            }
            break;
-	// case '2':printf("U have selected hubbali to bijapur\n");
-	// 	   break;
-  //   case '3':printf("U have selected hubbali to bangalore\n");
-	// 	   break;
-	// case '4':printf("U have selected hubbali to goa\n");
-	// 	   break;
-	// case '5':printf("U have selected hubbali to hydrabad\n");
-	// 	   break;
+	 case '2':for(int i=0; i<7; i++)
+   {
+     cout<<ubl_bjpr[i]<<'\n';
+   }
+	  break;
+   case '3':for(int i=0; i<5; i++)
+   {
+     cout<<ubl_bgk[i]<<'\n';
+
+   }
+	 break;
+	case '4':for(int i=0; i<6; i++)
+  {
+      cout<<ubl_goa[i]<<'\n';
+  }
+	 break;
+	case '5':for(int i=0; i<9; i++)
+  {
+    cout<<ubl_hyb[i]<<'\n';
+  }
+	 break;
    default:printf(" please enter the correct choice\n");
 	}
 }
