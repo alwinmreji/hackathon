@@ -5,7 +5,15 @@ using namespace std;
 
 struct cargo
 {
-  int
+  int train_no,boarding,deboarding;
+  cargo *next;
+};
+
+typedef cargo *CARGO;
+
+CARGO new_cargo()
+{
+  CARGO x = (CARGO)malloc(sizeof(cargo));
 }
 
 char menu();
@@ -14,6 +22,7 @@ void booking();
 // void train_content();
 void booking()
 {
+  CARGO engine;
   char choice;
   re:
   train_list();
@@ -29,6 +38,7 @@ void booking()
     return;
   }
   cout<<"\n\tBOOKING COUNTER";
+
 }
  void train_list()
 {
@@ -48,27 +58,27 @@ void booking()
                cout<<ubl_glb[i]<<'\n';
            }
            break;
-	 case '2':for(int i=0; i<7; i++)
-   {
-     cout<<ubl_bjpr[i]<<'\n';
-   }
-	  break;
-   case '3':for(int i=0; i<5; i++)
-   {
-     cout<<ubl_bgk[i]<<'\n';
+   case '2':for(int i=0; i<7; i++)
+            {
+              cout<<ubl_bjpr[i]<<'\n';
+            }
+         	  break;
+  case '3':for(int i=0; i<5; i++)
+            {
+              cout<<ubl_bgk[i]<<'\n';
 
-   }
-	 break;
+            }
+         	 break;
 	case '4':for(int i=0; i<6; i++)
-  {
-      cout<<ubl_goa[i]<<'\n';
-  }
-	 break;
-	case '5':for(int i=0; i<9; i++)
-  {
-    cout<<ubl_hyb[i]<<'\n';
-  }
-	 break;
+           {
+               cout<<ubl_goa[i]<<'\n';
+           }
+         	 break;
+  	case '5':for(int i=0; i<9; i++)
+           {
+             cout<<ubl_hyb[i]<<'\n';
+           }
+         	 break;
    default:printf(" please enter the correct choice\n");
 	}
 }
@@ -86,15 +96,15 @@ int main()
 {
   char ch;
   cout<<"Welcome To Train Freight Train Management System";
-  ch = menu();
   while(1)
   {
+    ch = menu();
     switch (ch)
     {
       case '1':train_list();
              break;
       case '2':booking();
-      //          break;
+             break;
       // case '3':train_content();
       //          break;
       case '4':exit(0);
