@@ -45,7 +45,7 @@ void booking()
 	char choice;
   char ubl_glb[9][4]={{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}};
   char ubl_bjpr[7][5]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
-  char ubl_bgk[5]4[]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"}};
+  char ubl_bgk[5][4]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"}};
   char ubl_goa[6][4]={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"VSG"}};
   char ubl_hyb[9][5]={{"UBL"},{"GDG"},{"BDM"},{"BGK"},{"BJPR"},{"GLB"},{"YG"},{"VKB"},{"HYB"}};
 	printf("\n\t\tList Of Trains \n1.UBL-YPR \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
