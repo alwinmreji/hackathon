@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
+#include<stdio.h>
 // #include<conio>
 using namespace std;
 
