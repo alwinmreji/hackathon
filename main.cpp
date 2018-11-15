@@ -19,7 +19,7 @@ void booking()
   train_list();
   cout<<"\n\tGo to booking counter ??(y/n)";
   cin>>choice;
-  if (choice != 'y' || choice != 'Y')
+  if (choice == 'n' || choice == 'N')
   {
     cout<<"\n\tDisplay train list once more ??(y/n)";
     cin>>choice;
@@ -33,7 +33,7 @@ void booking()
  void train_list()
 {
 	char choice;
-  char ubl_glb[9][4][2]={{{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}},{{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}}};
+  char ubl_glb[9][4]={{{"UBL"},{"HVR"},{"RNR"},{"HRR"},{"DVG"},{"RRB"},{"ASK"},{"TK"},{"YPR"}};
 	printf("\n\t\tList Of Trains \n1.UBL-YPR \n2.UBL-BJPR \n3.UBL-BLR \n4.UBL-GOA \n5.UBL-HYB\n");
 	printf("\nEnter Your choice:\t");
 	scanf(" %c",&choice);
