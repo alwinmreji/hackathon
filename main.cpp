@@ -1,79 +1,89 @@
+
+
 #include<iostream>
 #include<stdlib.h>
 #include<ctime>
 #include<stdio.h>
 // #include<conio>
+
+
 using namespace std;
 class train
 {
-struct cargo
-{
+  struct cargo
+  {
   int train_no,boarding,deboarding,day,month,year;
   cargo *next;
 };
-typedef cargo *CARGO;
-//CARGO new_cargo();
-//CARGO sorting(CARGO engine,CARGO present);
-//CARGO get_data(CARGO engine);
-//void booking();
-//void train_list();
-CARGO get_data(CARGO engine)
-{
-  CARGO x = new_cargo();
-  time_t t = time(0);
-  struct tm * now = localtime(&t);
-  // cout<<now;
-  int day_t,day = now->tm_mday + 1;
-  int month_t,month = now->tm_mon + 1;
-  int year_t,year = now->tm_year + 1900;
-  yr:
-  cout<<"\n\tEnter the Year :";
-  cin>>year_t;
-  if(year_t<year || year_t>year+1)
+  typedef cargo *CARGO;
+  //CARGO new_cargo();
+  //CARGO sorting(CARGO engine,CARGO present);
+  //CARGO get_data(CARGO engine);
+  //void booking();
+  //void train_list();
+  public:
+
+  CARGO get_data(CARGO engine)
   {
+    CARGO x = new_cargo();
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    // cout<<now;
+    int day_t,day = now->tm_mday + 1;
+    int month_t,month = now->tm_mon + 1;
+    int year_t,year = now->tm_year + 1900;
+    yr:
+    cout<<"\n\tEnter the Year :";
+    cin>>year_t;
+    if(year_t<year || year_t>year+1)
+    {
     // printf("INVALID INPUT %d",x->year);
-    cout<<"INVALID INPUT";//<<year_t<<" "<<year;//((int)x->year);
-    goto yr;
+      cout<<"INVALID INPUT";//<<year_t<<" "<<year;//((int)x->year);
+      goto yr;
+    }
+    mnth:
+    cout<<"\n\tEnter the Month :";
+    cin>>month_t;
+    if (((year_t - year==0)&&(month_t<month)) || (month_t>12))
+    {
+      cout<<"INVALID INPUT";
+      goto mnth;
+    }
+    d:
+    cout<<"\n\tEnter the Day :";
+    cin>>day_t;
+    if (((month_t-month==0)&&(day_t<day))|| (day_t>31))
+    {
+        cout<<"INVALID INPUT";
+        goto d;
+    }
+    x->year = year_t;
+    x->month = month_t;
+    x->day = day_t;
+    cout<<"\n\tEnter the train no.:";
+    cin>>x->train_no;
+    cout<<"\n\tEnter the boarding station no.:";
+    cin>>x->boarding;
+    cout<<"\n\tEnter the deboarding station no.:";
+    cin>>x->deboarding;
+    if (engine == NULL)
+    {
+      return x;
+    }
+    engine = sorting(engine,x);
+    return engine;
   }
-  mnth:
-  cout<<"\n\tEnter the Month :";
-  cin>>month_t;
-  if (((year_t - year==0)&&(month_t<month)) || (month_t>12))
+
+
+  CARGO new_cargo()
   {
-    cout<<"INVALID INPUT";
-    goto mnth;
-  }
-  d:
-  cout<<"\n\tEnter the Day :";
-  cin>>day_t;
-  if (((month_t-month==0)&&(day_t<day))|| (day_t>31))
-  {
-    cout<<"INVALID INPUT";
-    goto d;
-  }
-  x->year = year_t;
-  x->month = month_t;
-  x->day = day_t;
-  cout<<"\n\tEnter the train no.:";
-  cin>>x->train_no;
-  cout<<"\n\tEnter the boarding station no.:";
-  cin>>x->boarding;
-  cout<<"\n\tEnter the deboarding station no.:";
-  cin>>x->deboarding;
-  if (engine == NULL)
-  {
+    CARGO x = (CARGO)malloc(sizeof(cargo));
     return x;
   }
-  engine = sorting(engine,x);
-  return engine;
-}
-CARGO new_cargo()
-{
-  CARGO x = (CARGO)malloc(sizeof(cargo));
-  return x;
-}
-CARGO sorting(CARGO engine,CARGO present)
-{
+
+
+  CARGO sorting(CARGO engine,CARGO present)
+  {
   CARGO temp,prev;
   if (engine->next == NULL)
   {
@@ -94,17 +104,17 @@ CARGO sorting(CARGO engine,CARGO present)
     prev= temp;
     temp = temp->next;
   }
+  return engine;
 }
 
-public:
-char station_list[7][5];
-// char menu();
+  CARGO engine=NULL;
+
+  char station_list[7][5];
+  int train_no;
 
 };
 
-// train n[10];
 train obj[5];
-
 
 int a;
 char menu();
@@ -114,7 +124,7 @@ void booking();
 // void train_content();
 void booking()
 {
-  CARGO engine=NULL;
+  int train_no_t;
   char choice;
   re:
   train_list();
@@ -130,9 +140,20 @@ void booking()
     return;
   }
   cout<<"\n\t\tBOOKING COUNTER";
-  cout<<"\n\tEnter the train no.:\t"
-  engine = get_data(engine);
+  cout<<"\n\tEnter the train no.:\t";
+  cin>>train_no_t;
+  for (int i=0; i<5; i++)
+  {
+    if(obj[i].train_no == train_no_t)
+    {
+      a=i;
+      break;
+    }
+  }
+  obj[a].engine = obj[a].get_data(obj[a].engine);
 }
+
+
 char menu()
 {
   char a;
@@ -140,6 +161,8 @@ char menu()
   cin>>a;
   return a;
 }
+
+
 void train_list()
 {
  char choice;
@@ -179,11 +202,18 @@ void train_list()
  }
 }
 
+
 int main()
 {
+  obj[0].train_no=12246;
+  obj[1].train_no=12247;
+  obj[2].train_no=12298;
+  obj[3].train_no=12270;
+  obj[4].train_no=12345;
   // train obj[5];
-  obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
-  obj[1].station_list={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+  char stnt_list_t[7][5] ={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
+  // obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
+  obj[1].station_list=stnt_list_t;//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
   obj[2].station_list={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
   obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
   obj[4].station_list={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
