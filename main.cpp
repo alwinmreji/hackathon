@@ -8,13 +8,16 @@
 
 
 using namespace std;
+
 class train
 {
   struct cargo
   {
-  int train_no,boarding,deboarding,day,month,year;
-  cargo *next;
-};
+    int train_no,boarding,deboarding,day,month,year;
+    cargo *next;
+    char content[20];
+  };
+
   typedef cargo *CARGO;
   //CARGO new_cargo();
   //CARGO sorting(CARGO engine,CARGO present);
@@ -60,12 +63,14 @@ class train
     x->year = year_t;
     x->month = month_t;
     x->day = day_t;
-    cout<<"\n\tEnter the train no.:";
-    cin>>x->train_no;
-    cout<<"\n\tEnter the boarding station no.:";
+    //cout<<"\n\tEnter the train no.:\t";
+    //cin>>x->train_no;
+    cout<<"\n\tEnter the boarding station no.:\t";
     cin>>x->boarding;
-    cout<<"\n\tEnter the deboarding station no.:";
+    cout<<"\n\tEnter the deboarding station no.:\t";
     cin>>x->deboarding;
+    cout<<"\n\tEnter the content of the cargo:\t";
+    cin>>x->content;
     if (engine == NULL)
     {
       return x;
@@ -82,30 +87,47 @@ class train
   }
 
 
+  void display(CARGO engine)
+  {
+      if (engine == NULL)
+      {
+        cout<<"\n\tThere is no content!!";
+        return;
+      }
+      CARGO temp = engine;
+      while(temp == NULL)
+      {
+        cout<<"\n\tContent :"<<temp->content;
+        cout<<"\n\tDeboarding station:"<<temp->deboarding<<'\n';
+        temp=temp->next;
+      }
+  }
+
+
   CARGO sorting(CARGO engine,CARGO present)
   {
-  CARGO temp,prev;
-  if (engine->next == NULL)
-  {
-    if (engine->deboarding>present->deboarding)
+    CARGO temp,prev;
+    if (engine->next == NULL)
     {
-      present->next = engine;
-      return present;
+      if (engine->deboarding>present->deboarding)
+      {
+        present->next = engine;
+        return present;
+      }
     }
-  }
-  temp =engine;
-  while(temp==NULL)
-  {
-    if(temp->deboarding>present->deboarding)
+    temp =engine;
+    while(temp==NULL)
     {
-      prev->next=present;
-      present->next=temp;
+      if(temp->deboarding>present->deboarding)
+      {
+        prev->next=present;
+        present->next=temp;
+      }
+      prev= temp;
+      temp = temp->next;
     }
-    prev= temp;
-    temp = temp->next;
+    return engine;
   }
-  return engine;
-}
 
   CARGO engine=NULL;
 
@@ -121,7 +143,33 @@ char menu();
 void train_list();
 void booking();
 
-// void train_content();
+void train_content();
+
+/*********************************************************
+This function is used to display the sorted content of the
+the freight train.
+**********************************************************/
+void train_content()
+{
+  int train_no_t;
+  cout<<"\n\tEnter the train number whose content is to be displayed";
+  cin>>train_no_t;
+  for (int i=0; i<5; i++)
+  {
+    if (train_no_t == obj[i].train_no)
+    {
+      a=i;
+      break;
+    }
+  }
+  obj[a].display(obj[a].engine);
+}
+
+
+/*********************************************************
+This function is allows the user to book the cargo
+compartment of the freight train.
+**********************************************************/
 void booking()
 {
   int train_no_t;
@@ -153,7 +201,10 @@ void booking()
   obj[a].engine = obj[a].get_data(obj[a].engine);
 }
 
-
+/*********************************************************
+This function is used to display the main MENU of the
+program.
+**********************************************************/
 char menu()
 {
   char a;
@@ -162,7 +213,10 @@ char menu()
   return a;
 }
 
-
+/*********************************************************
+This function is used to display the available freight
+train.
+**********************************************************/
 void train_list()
 {
  char choice;
@@ -205,6 +259,10 @@ void train_list()
 
 int main()
 {
+  /*********************************************************
+  here we are defining the train nos. which are availabe in
+  the program.
+  **********************************************************/
   obj[0].train_no=12246;
   obj[1].train_no=12247;
   obj[2].train_no=12298;
@@ -212,11 +270,22 @@ int main()
   obj[4].train_no=12345;
   // train obj[5];
   char stnt_list_t[7][5] ={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
-  // obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
-  obj[1].station_list=stnt_list_t;//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
-  obj[2].station_list={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
-  obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
-  obj[4].station_list={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+  // obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};a
+  a=4;
+  while (a)
+  {
+    for (int i=0; i<7; i++)
+    {
+      for (int j=0; j<5; j++)
+      {
+        obj[1].station_list[i][j]=stnt_list_t[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+      }
+    }
+    --a;
+  }
+  // obj[2].station_list={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
+  // obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
+  // obj[4].station_list={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
 
   // booking();
   char ch;
@@ -230,8 +299,8 @@ int main()
              break;
       case '2':booking();
              break;
-      // case '3':train_content();
-      //          break;
+      case '3':train_content();
+                break;
       case '4':exit(0);
                   break;
       default : cout<<"\n\n\t!!...INVALID INPUT...!!";
