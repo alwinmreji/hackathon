@@ -30,7 +30,7 @@ class train
   {
     CARGO x = new_cargo();
     time_t t = time(0);
-    struct tm * now = localtime(&t);
+  struct tm * now = localtime(&t);
     // cout<<now;
     int day_t,day = now->tm_mday + 1;
     int month_t,month = now->tm_mon + 1;
@@ -129,7 +129,7 @@ class train
     return engine;
   }
 
-  CARGO engine=NULL;
+  CARGO engine;
 
   char station_list[7][5];
   int train_no;
@@ -223,10 +223,10 @@ void train_list()
 
  printf("\n\t\tList Of Trains \n1.UBL-YPR - 12246 \n2.UBL-BJPR - 12247\n3.UBL-BGK - 12298 \n4.UBL-GOA  - 12270\n5.UBL-HYB - 12345\n");
  printf("\nEnter Your choice:\t");
- scanf(" %c",&choice);
+ scanf_s(" %c",&choice);
  switch(choice)
  {
- case '1':for(int i=0; i<9; i++)
+ case '1':for(int i=0; i<7; i++)
           {
              cout<<i+1<<". "<<obj[0].station_list[i]<<'\n';
           }
@@ -247,7 +247,7 @@ void train_list()
               cout<<i+1<<". "<<obj[3].station_list[i]<<'\n';
           }
           break;
-   case '5':for(int i=0; i<9; i++)
+   case '5':for(int i=0; i<7; i++)
           {
             cout<<i+1<<". "<<obj[4].station_list[i]<<'\n';
           }
@@ -269,20 +269,68 @@ int main()
   obj[3].train_no=12270;
   obj[4].train_no=12345;
   // train obj[5];
-  char stnt_list_t[7][5] ={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
-  // obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};a
-  a=4;
-  while (a)
-  {
+  char stnt_list_t4[7][5]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+  //obj[0].station_list={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+  //a=4;
+  //while (a)
+  //{
+	  //int i,j;
+	  for(int i=0 ;i<7 ; i++)
+	  {
+
+		  for(int j=0 ; j<4 ;j++)
+		  {
+			  obj[1].station_list[i][j]=stnt_list_t4[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+		  }
+	  }
+	  //--a;
+  //}
+  char stnt_list_t1[7][5] ={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
+  // obj[0].station_list={{"UBL"},{"HVR"},{"RNR"},{"DVG"},{"ASK"},{"TK"},{"YPR"}};
+  //a=5;
+  //while (a)
+  //{
     for (int i=0; i<7; i++)
     {
       for (int j=0; j<5; j++)
       {
-        obj[1].station_list[i][j]=stnt_list_t[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+        obj[1].station_list[i][j]=stnt_list_t1[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
       }
     }
-    --a;
-  }
+    //--a;
+  //}
+  char stnt_list_t2[7][4]={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
+//  obj[2].station_list={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
+  //a=4;
+  //while (a)
+  //{
+	  //int i,j;
+	  for(int i=0 ;i<7 ; i++)
+	  {
+
+		  for(int j=0 ; j<4 ;j++)
+		  {
+			  obj[3].station_list[i][j]=stnt_list_t2[i][j];//{{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
+		  }
+	  }
+	  //--a;
+  //}
+	  char stnt_list_t3[7][5]={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+	//  obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
+	  //a=4;
+  //while (a)
+  //{
+	  //int i,j;
+	  {
+	  for(int i=0 ;i<7 ; i++)
+	  {
+		  for(int j=0 ; j<5 ;j++)
+		  {
+			  obj[4].station_list[i][j]=stnt_list_t3[i][j];//{{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+		  }
+	  }
+	  //--a
+	  //}
   // obj[2].station_list={{"UBL"},{"NGR"},{"GDG"},{"HRR"},{"BDM"},{"RRB"},{"BGK"}};
   // obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
   // obj[4].station_list={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
@@ -306,4 +354,5 @@ int main()
       default : cout<<"\n\n\t!!...INVALID INPUT...!!";
     }
   }
+}
 }
