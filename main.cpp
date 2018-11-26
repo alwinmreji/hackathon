@@ -939,7 +939,6 @@ onexit_t __cdecl onexit(_In_opt_ onexit_t _Func);
 #pragma pack(pop)
 
 #endif  /* _INC_STDLIB */
-
 // ctime standard header
 #pragma once
 #ifndef _CTIME_
@@ -1710,7 +1709,6 @@ _Check_return_ _CRT_NONSTDC_DEPRECATE(_rmtmp) _CRTIMP int __cdecl rmtmp(void);
 
 #endif  /* _INC_STDIO */
 
-
 //#include<iostream>
 //#include<stdlib.h>
 //#include<ctime>
@@ -1735,6 +1733,41 @@ class train
   typedef cargo *CARGO;
   public:
 
+  CARGO sorting(CARGO engine,CARGO present)
+  {
+    //cout<<"hi";
+    CARGO temp,prev;
+    if (engine->next == NULL)
+    {
+	    //cout<<" vain "<<engine->deboarding;
+      if (engine->deboarding<present->deboarding)
+      {
+        //cout<<"vain";
+        present->next = engine;
+		engine->next = NULL;
+        return present;
+      }
+	  engine->next = present;
+	  return engine;
+    }
+	prev = engine;
+	temp =engine;
+    while(temp!=NULL)
+    {
+      //cout<<"\t"<<temp->deboarding<<"\t"<<present->deboarding<<"\t";
+      if(temp->deboarding<present->deboarding)
+      {
+		  prev->next=present;
+		  present->next=temp;
+		  return engine;
+      }
+      prev= temp;
+      temp = temp->next;
+    }
+	prev->next=present;
+    //cout<<"vains";
+    return engine;
+  }
   CARGO get_data(CARGO engine)
   {
     CARGO x = new_cargo();
@@ -1750,40 +1783,52 @@ class train
     cin>>year_t;
     if(year_t<year || year_t>year+1)
     {
-      cout<<"INVALID INPUT";
-      goto yr;
+       cout<<"\tINVALID INPUT";
+       goto yr;
     }
     mnth:
     cout<<"\n\tEnter the Month :";
     cin>>month_t;
     if (((year_t - year==0)&&(month_t<month)) || (month_t>12))
     {
-      cout<<"INVALID INPUT";
+      cout<<"\nINVALID INPUT";
       goto mnth;
     }
-    d:
-    cout<<"\n\tEnter the Day :";
-    cin>>day_t;
-    if (((month_t-month==0)&&(day_t<day))|| (day_t>31))
-    {
-        cout<<"INVALID INPUT";
-        goto d;
+     d:
+     cout<<"\n\tEnter the Day :";
+     cin>>day_t;
+     if (((month_t-month==0)&&(day_t<day))|| (day_t>31))
+     {
+         cout<<"\tINVALID INPUT";
+         goto d;
     }
     x->year = year_t;
     x->month = month_t;
     x->day = day_t;
     cout<<"\n\tThe date of journey is: "<<x->day<<"/"<<x->month<<"/"<<x->year;
+	re:
     cout<<"\n\tEnter the boarding station no.:\t";
     cin>>x->boarding;
-    cout<<"\n\tYou have set "<<station_list[--x->boarding]<<" as boarding station";
+	if (x->boarding>7 || x->boarding<1)
+	{
+		cout<<"\n\tINVALID!!\t";
+		goto re;
+	}
+    cout<<"\n\tYou have set "<<station_list[(x->boarding)-1]<<" as boarding station";
     cout<<"\n\tEnter the deboarding station no.:\t";
     cin>>x->deboarding;
-    cout<<"\n\tYou have set "<<station_list[--x->deboarding]<<" as deboarding station";
+	if (x->deboarding<=x->boarding || x->deboarding>7)
+	{
+		cout<<"\n\tINVALID";
+		goto re;
+	}
+    cout<<"\n\tYou have set "<<station_list[(x->deboarding)-1]<<" as deboarding station";
     cout<<"\n\tEnter the content of the cargo:\t";
     cin>>x->content;
+	x->next=NULL;
     if (engine == NULL)
     {
-      cout<<"hey";
+      //cout<<"hey";
       return x;
     }
     engine = sorting(engine,x);
@@ -1806,7 +1851,7 @@ class train
         return;
       }
       CARGO temp = engine;
-      while(temp == NULL)
+      while(temp != NULL)
       {
         cout<<"\n\tContent :"<<temp->content;
         cout<<"\n\tDeboarding station:"<<temp->deboarding<<'\n';
@@ -1814,35 +1859,6 @@ class train
       }
   }
 
-
-  CARGO sorting(CARGO engine,CARGO present)
-  {
-    cout<<"hi";
-    CARGO temp,prev;
-    if (engine->next == NULL)
-    {
-      if (engine->deboarding>present->deboarding)
-      {
-        cout<<"vain";
-        present->next = engine;
-        return present;
-      }
-    }
-    temp =engine;
-    while(temp==NULL)
-    {
-      cout<<"\t"<<temp->deboarding<<"\t";
-      if(temp->deboarding>present->deboarding)
-      {
-        prev->next=present;
-        present->next=temp;
-      }
-      prev= temp;
-      temp = temp->next;
-    }
-    cout<<"vains";
-    return engine;
-  }
 
   CARGO engine;
 
@@ -1867,7 +1883,7 @@ the freight train.
 void train_content()
 {
   int train_no_t;
-  cout<<"\n\tEnter the train number whose content is to be displayed";
+  cout<<"\n\tEnter the train number whose content is to be displayed:\t";
   cin>>train_no_t;
   for (int i=0; i<5; i++)
   {
@@ -1893,7 +1909,7 @@ void booking()
   cout<<"\n\tDo you want to see train list ?(y/n)";
   cin>>choice;
   if(choice == 'y' || choice == 'Y')
-    train_list();
+   train_list();
   cout<<"\n\tGo to booking counter ?(y/n)";
   cin>>choice;
   if (choice == 'n' || choice == 'N')
@@ -1901,17 +1917,17 @@ void booking()
     cout<<"\n\tDisplay train list once more ?(y/n)";
     cin>>choice;
     if (choice == 'y' || choice == 'Y')
-      goto re;
-    else
-    return;
-  }
+    goto re;
+     else
+     return;
+   }
   cout<<"\n\t\tBOOKING COUNTER";
   train_no:
   cout<<"\n\tEnter the train no.:\t";
   cin>>train_no_t;
   for (i=0; i<5; i++)
   {
-    cout<<obj[i].train_no<<" "<<train_no_t;
+    // cout<<obj[i].train_no<<" "<<train_no_t;
     if(obj[i].train_no == train_no_t)
     {
       a=i;
