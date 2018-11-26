@@ -1,11 +1,7 @@
-
-
 #include<iostream>
 #include<stdlib.h>
 #include<ctime>
 #include<stdio.h>
-// #include<conio>
-
 
 using namespace std;
 
@@ -13,35 +9,35 @@ class train
 {
   struct cargo
   {
-    int train_no,boarding,deboarding,day,month,year;
+    int train_no;
+    int boarding;
+    int deboarding;
+    int day;
+    int month;
+    int year;
     cargo *next;
     char content[20];
   };
 
   typedef cargo *CARGO;
-  //CARGO new_cargo();
-  //CARGO sorting(CARGO engine,CARGO present);
-  //CARGO get_data(CARGO engine);
-  //void booking();
-  //void train_list();
   public:
 
   CARGO get_data(CARGO engine)
   {
     CARGO x = new_cargo();
     time_t t = time(0);
-  struct tm * now = localtime(&t);
+    struct tm * now = localtime(&t);
     // cout<<now;
     int day_t,day = now->tm_mday + 1;
     int month_t,month = now->tm_mon + 1;
     int year_t,year = now->tm_year + 1900;
     yr:
+    cout<<"\n\tEnter the date of Journey";
     cout<<"\n\tEnter the Year :";
     cin>>year_t;
     if(year_t<year || year_t>year+1)
     {
-    // printf("INVALID INPUT %d",x->year);
-      cout<<"INVALID INPUT";//<<year_t<<" "<<year;//((int)x->year);
+      cout<<"INVALID INPUT";
       goto yr;
     }
     mnth:
@@ -63,8 +59,6 @@ class train
     x->year = year_t;
     x->month = month_t;
     x->day = day_t;
-    //cout<<"\n\tEnter the train no.:\t";
-    //cin>>x->train_no;
     cout<<"\n\tEnter the boarding station no.:\t";
     cin>>x->boarding;
     cout<<"\n\tEnter the deboarding station no.:\t";
@@ -172,10 +166,13 @@ compartment of the freight train.
 **********************************************************/
 void booking()
 {
-  int train_no_t;
+  int train_no_t,i=0;
   char choice;
   re:
-  train_list();
+  cout<<"\n\tDo you want to see train list ?(y/n)";
+  cin>>choice;
+  if(choice == 'y' || choice == 'Y')
+    train_list();
   cout<<"\n\tGo to booking counter ?(y/n)";
   cin>>choice;
   if (choice == 'n' || choice == 'N')
@@ -188,15 +185,22 @@ void booking()
     return;
   }
   cout<<"\n\t\tBOOKING COUNTER";
+  train_no:
   cout<<"\n\tEnter the train no.:\t";
   cin>>train_no_t;
-  for (int i=0; i<5; i++)
+  for (i=0; i<5; i++)
   {
+    // cout<<obj[i].train_no<<" "<<train_no_t;
     if(obj[i].train_no == train_no_t)
     {
       a=i;
       break;
     }
+  }
+  if (a!=i)
+  {
+    cout<<"\n\tINVALID INPUT";
+    goto train_no;
   }
   obj[a].engine = obj[a].get_data(obj[a].engine);
 }
@@ -221,9 +225,9 @@ void train_list()
 {
  char choice;
 
- printf("\n\t\tList Of Trains \n1.UBL-YPR - 12246 \n2.UBL-BJPR - 12247\n3.UBL-BGK - 12298 \n4.UBL-GOA  - 12270\n5.UBL-HYB - 12345\n");
+ printf("\n\t\tList Of Trains \n1.UBL-YPR - 18048 \n2.UBL-BJPR - 12245\n3.UBL-BGK - 12246 \n4.UBL-GOA  - 22864\n5.UBL-HYB - 12864\n");
  printf("\nEnter Your choice:\t");
- scanf_s(" %c",&choice);
+ scanf(" %c",&choice);
  switch(choice)
  {
  case '1':for(int i=0; i<7; i++)
@@ -236,13 +240,13 @@ void train_list()
              cout<<i+1<<". "<<obj[1].station_list[i]<<'\n';
            }
            break;
- case '3':for(int i=0; i<5; i++)
+ case '3':for(int i=0; i<7; i++)
            {
              cout<<i+1<<". "<<obj[2].station_list[i]<<'\n';
 
            }
           break;
- case '4':for(int i=0; i<6; i++)
+ case '4':for(int i=0; i<7; i++)
           {
               cout<<i+1<<". "<<obj[3].station_list[i]<<'\n';
           }
@@ -263,14 +267,14 @@ int main()
   here we are defining the train nos. which are availabe in
   the program.
   **********************************************************/
-  obj[0].train_no=12246;
-  obj[1].train_no=12247;
-  obj[2].train_no=12298;
-  obj[3].train_no=12270;
-  obj[4].train_no=12345;
+  obj[0].train_no=18048;
+  obj[1].train_no=12245;
+  obj[2].train_no=12246;
+  obj[3].train_no=22864;
+  obj[4].train_no=12864;
   // train obj[5];
   char stnt_list_t4[7][5]={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
-  //obj[0].station_list={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+  // char stnt_list_t1={{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
   //a=4;
   //while (a)
   //{
@@ -278,7 +282,7 @@ int main()
 	  for(int i=0 ;i<7 ; i++)
 	  {
 
-		  for(int j=0 ; j<4 ;j++)
+		  for(int j=0 ; j<5 ;j++)
 		  {
 			  obj[1].station_list[i][j]=stnt_list_t4[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
 		  }
@@ -294,7 +298,7 @@ int main()
     {
       for (int j=0; j<5; j++)
       {
-        obj[1].station_list[i][j]=stnt_list_t1[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
+        obj[0].station_list[i][j]=stnt_list_t1[i][j];//{{"UBL"},{"NGR"},{"GDG"},{"BDM"},{"BGK"},{"LMT"},{"BJPR"}};
       }
     }
     //--a;
@@ -308,20 +312,32 @@ int main()
 	  for(int i=0 ;i<7 ; i++)
 	  {
 
-		  for(int j=0 ; j<4 ;j++)
+		  for(int j=0 ; j<5 ;j++)
 		  {
-			  obj[3].station_list[i][j]=stnt_list_t2[i][j];//{{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
+			  obj[2].station_list[i][j]=stnt_list_t2[i][j];//{{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
 		  }
 	  }
 	  //--a;
   //}
-	  char stnt_list_t3[7][5]={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+	  char stnt_list_t5[7][5]={{"UBL"},{"GDG"},{"BGK"},{"MGA"},{"DVG"},{"PNL"},{"GOA"}};
 	//  obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
 	  //a=4;
   //while (a)
   //{
 	  //int i,j;
+	  for(int i=0 ;i<7 ; i++)
 	  {
+		  for(int j=0 ; j<5 ;j++)
+		  {
+			  obj[3].station_list[i][j]=stnt_list_t5[i][j];//{{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+		  }
+	  }
+    char stnt_list_t3[7][5]={{"UBL"},{"GDG"},{"BGK"},{"BJPR"},{"GLB"},{"VKB"},{"HYB"}};
+	//  obj[3].station_list={{"DWR"},{"LWR"},{"LD"},{"CLR"},{"QLM"},{"YG"},{"VSG"}};
+	  //a=4;
+  //while (a)
+  //{
+	  //int i,j;
 	  for(int i=0 ;i<7 ; i++)
 	  {
 		  for(int j=0 ; j<5 ;j++)
@@ -354,5 +370,4 @@ int main()
       default : cout<<"\n\n\t!!...INVALID INPUT...!!";
     }
   }
-}
 }
